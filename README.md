@@ -1,7 +1,7 @@
 # qaApp
 
 > A Vue.js project
-#Just an app with a lot of forms to practice vue and backend api
+ Just an app with a lot of forms to practice vue and backend api
 
 ## Build Setup
 

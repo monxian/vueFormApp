@@ -1,4 +1,4 @@
-# qaApp test
+# qaApp
 
 > A Vue.js project
  Just an app with a lot of forms to practice vue and backend api 

@@ -7,7 +7,7 @@
 		<div class="field">
 			<div class="control">
 				<label class="checkbox">
-					<input type="checkbox">
+					<input type="checkbox"  v-model="bondcx" >
 					Connected to GB/MS
 				</label>
 			</div>
@@ -16,7 +16,7 @@
 		<div class="field">
 			<div class="control">
 				<label class="checkbox">
-					<input type="checkbox">
+					<input type="checkbox"  v-model="oducx">
 					Connected to ODU
 				</label>
 			</div>
@@ -25,7 +25,7 @@
 		<div class="field">
 			<label class="label">Connection Type</label>
 			<div class="control">
-				<div class="select">
+				<div class="select" v-model="bondtype">
 					<select>
 						<option>Strap</option>
 						<option>Split Bolt</option>
@@ -39,7 +39,7 @@
 		<div class="field">
 			<label class="label">Other Bond Type</label>
 			<div class="control">
-				<input class="input" type="text" placeholder="Water pipe conduit etc...">
+				<input class="input" type="text"  v-model="bondother" placeholder="Water pipe conduit etc...">
 			</div>
 		</div>
 
@@ -49,7 +49,7 @@
 		<div class="field">
 			<div class="control">
 				<label class="checkbox">
-					<input type="checkbox">
+					<input type="checkbox"  v-model="gndcx">
 					Connected to GB/MS
 				</label>
 			</div>
@@ -58,7 +58,7 @@
 		<div class="field">
 			<div class="control">
 				<label class="checkbox">
-					<input type="checkbox">
+					<input type="checkbox"  v-model="gndsource">
 					Connected to Ground Source
 				</label>
 			</div>
@@ -67,7 +67,7 @@
 		<div class="field">
 			<label class="label">Connection Type</label>
 			<div class="control">
-				<div class="select">
+				<div class="select" v-model="gndtype">
 					<select>
 						<option>Braid</option>
 						<option>Stack</option>
@@ -81,7 +81,7 @@
 		<div class="field">
 			<label class="label">Other Ground Type</label>
 			<div class="control">
-				<input class="input" type="text" placeholder="Water pipe conduit etc...">
+				<input class="input" type="text" v-model="gndother" placeholder="Water pipe conduit etc...">
 			</div>
 		</div>
 
@@ -92,19 +92,19 @@
 		<div class="field">
 			<label class="label">Messenger Wire</label>
 			<div class="control">
-				<input class="input" type="text" placeholder="volts">
+				<input class="input" type="text" v-model="vmess" placeholder="volts">
 			</div>
 		</div>
 		<div class="field">
 			<label class="label">Connector</label>
 			<div class="control">
-				<input class="input" type="text" placeholder="Volts">
+				<input class="input" type="text" v-model="vbarrel"  placeholder="Volts">
 			</div>
 		</div>
 		<div class="field">
 			<label class="label">10gauge Ground Wire</label>
 			<div class="control">
-				<input class="input" type="text" placeholder="Volts">
+				<input class="input" type="text" v-model="vgndwire" placeholder="Volts">
 			</div>
 		</div>
 
@@ -115,7 +115,42 @@
 
 <script>
 export default {
-   
+    data () {
+        return {
+            bondcx: '',
+            oducx: '3 oducx',
+            bondtype: '',
+            bondother: '120',
+            gndcx: '',
+            gndsource: '',
+            gndtype: '',
+            gndother: '',
+            vmess: '',
+            vbarrel: '',
+            vgndwire: '',
+        };
+    },
+    methods:{
+        onSubmit() {
+            const formData ={
+                bondcx: this.bondcx,
+                oducx: this.oducx,
+                bondtype: this.bondtype,
+                bondother: this.bondother,
+                gndcx: this.gndcx,
+                gndsource: this.gndsource,
+                gndtype: this.gndtype,
+                gndother: this.gndother,
+                vmess: this.vmess,
+                vbarrel: this.vbarrel,
+                vgndwire: this.vgndwire,
+            }
+            console.log(formData);
+            axios.post('/api/Activities/5ac551b87f43c335fd1a5a7e/outlets', formData)
+                .then(res => console.log(res))
+                .catch(error => console.log(error))
+        }
+    }
 }
 </script>
 <style>

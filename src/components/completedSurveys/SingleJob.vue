@@ -1,6 +1,7 @@
 <template>
   <div class="container">
      <app-header></app-header>
+     <p>{{routeId}}</p>
     <div class="level">
       <button class="button is-item is-info is-small" @click="selectedComponent = 'appOutlet'">Inside</button>
       <button class="button is-item is-info is-small" @click="selectedComponent = 'appOutside'">Outside</button>
@@ -17,34 +18,37 @@
 </template>
 
 <script>
-import axios from 'axios';
 
 import Header from '../Hearder.vue';
-import Outlet from '../newSurvey/Outlets.vue';
-import Outside from '../newSurvey/Outside.vue';
+import Outlet from '../completedSurveys/CompletedOutlets.vue';
+import Outside from '../completedSurveys/CompletedOutside.vue';
 import Problems from '../newSurvey/ProblemsList.vue';
 import Equipment from '../newSurvey/EquipmentList.vue';
 
 export default {
-  created(){
-    axios.get('/test.json')
-      .then(res => {
-        console.log(res)
-        const data = res.data
-        const formInfo = []
-        for(let key in data){
-          const info = data[key]
-          info.id = key
-          formInfo.push(info)
-        }
-        console.log(formInfo)
-        this.tvmodel = formInfo[0].tvmodel
-        this.roomname = formInfo[0].roomname
-      })
-      .catch(error => console.log(error))
-  },
+  // created(){
+  //   axios.get('/api/Outlets')
+  //     .then(res => {
+  //       console.log(res)
+  //       const data = res.data
+  //       const formInfo = []
+  //       for(let key in data){
+  //         const info = data[key]
+  //         info.id = key
+  //         formInfo.push(info)
+  //       }
+  //       console.log(formInfo, " in single after loop")
+  //       this.tvmodel = formInfo[0].tvmodel
+  //       this.room = formInfo[0].room
+  //       console.log("tv ", this.tvmodel)
+  //       console.log("room", this.room)
+  //     })
+  //     .catch(error => console.log(error))
+  // },
+  
   data: function(){
     return {
+      routeId: this.$route.params.id,
       selectedComponent: 'appOutlet',
       tvmodel: '',
       roomname: '',

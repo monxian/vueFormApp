@@ -2,7 +2,7 @@
    <div class="level is-mobile">
 	  <div class="level-item">
 	     <router-link 
-	        to="/" tag="a">
+	        to="/completed" tag="a">
 	        <div style="font-size:1.5em; color:#4d92b9">
               <i class="fas fa-home"></i>
             </div>

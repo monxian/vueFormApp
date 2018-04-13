@@ -25,7 +25,7 @@
       <div class="field">
         <p class="help">Room</p>
         <div class="control">
-          <input class="input" type="text" v-model="roomname" placeholder="living Room">
+          <input class="input" type="text" v-model="room" placeholder="living Room">
         </div>
       </div>
       <div class="field">
@@ -72,8 +72,8 @@ export default {
      return {
         tvmodel: '',
         pronge: '3 pronge',
-        roomname: '',
-        avolts: '',
+        room: '',
+        avolts: '120',
         bvolts: '',
         cvolts: '',
         dvolts: '',
@@ -85,7 +85,7 @@ export default {
       const formData ={
         tvmodel: this.tvmodel,
         pronge: this.pronge,
-        roomname: this.roomname,
+        room: this.room,
         avolts: this.avolts,
         bvolts: this.bvolts,
         cvolts: this.cvolts,
@@ -93,7 +93,7 @@ export default {
         evolts: this.evolts,
       }
       console.log(formData);
-      axios.post('/test.json', formData)
+      axios.post('/api/Activities/5ac551b87f43c335fd1a5a7e/outlets', formData)
         .then(res => console.log(res))
         .catch(error => console.log(error))
     }

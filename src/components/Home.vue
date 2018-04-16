@@ -1,25 +1,26 @@
 <template>
  <div class="wallpaper">
   <div class="container">
-  <section class="hero ">
-  <div class="hero-body">
-    <div class="container">
-      <img src="../assets/logo.png" alt="logo" width="150" height="150">
-	    <h2 class="title is-size-2">
-	        <span class="brand-logo">Qa App</span> 
-	    </h2>
-      <h4 class="subtitle">
-        A tier 3 mobile app
-      </h4>
+     <section class="hero ">
+      <div class="hero-body">
+        <div class="container">
+          <img src="../assets/logo.png" alt="logo" width="150" height="150">
+            <h2 class="title is-size-2">
+                <span class="brand-logo">Qa App</span>
+            </h2>
+          <h4 class="subtitle">
+            A tier 3 mobile app
+          </h4>
+        </div>
+      </div>
+    </section>
+    <div class="level">
+      <router-link to="/completed" class="button  rounded" tag="button">Completed Surveys</router-link>
+      <router-link to="/setup"  class="button  rounded" tag="button">Start New Survey</router-link>
     </div>
-  </div>
-
-</section>
-
-   
-    
-    <router-link to="/completed" class="button  rounded" tag="button">Completed Surveys</router-link>
-    <router-link to="/start"  class="button  rounded" tag="button">Start New Survey</router-link>
+    <div class="level">
+      <router-link to="/completed" class="button  rounded" tag="button">Resume Survey</router-link>
+    </div>
     <!-- <button @click="navigateToNew" class="button is-info">Start New Survey</button> -->
   </div>
  </div>
@@ -37,7 +38,7 @@
 	  	 // 	this.$router.push('/start');
 	  	 // }
 	  },
-	
+
 	}
 </script>
 

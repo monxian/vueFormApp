@@ -1,7 +1,7 @@
 <template>
   <div class="container">
      <app-header></app-header>
-     <p>{{routeId}}</p>
+     <!--<p>{{routeId}}</p>-->
     <div class="level">
       <button class="button is-item is-info is-small" @click="selectedComponent = 'appOutlet'">Inside</button>
       <button class="button is-item is-info is-small" @click="selectedComponent = 'appOutside'">Outside</button>
@@ -76,7 +76,7 @@ export default {
 }
 
 .level{
-  margin:  0;
+  margin-top: 10px;
 }
 a {
   color: #42b983;

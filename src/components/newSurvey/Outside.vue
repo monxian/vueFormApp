@@ -144,7 +144,7 @@ export default {
                 vmess: this.vmess,
                 vbarrel: this.vbarrel,
                 vgndwire: this.vgndwire,
-            }
+            };
             console.log(formData);
             axios.post('/api/Activities/5ac551b87f43c335fd1a5a7e/outlets', formData)
                 .then(res => console.log(res))

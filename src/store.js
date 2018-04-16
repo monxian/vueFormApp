@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios';
 import {router} from './main.js'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
@@ -24,48 +24,69 @@ export const store = new Vuex.Store({
         state.outsideValues = outsideValues;
     },
     authUser(state, userData){
-  	    state.idToken = userData.token
-        state.userId = userData.userId
+  	    state.idToken = userData.token;
+        state.userId = userData.userId;
+    },
+    clearAuthData(state){
+        state.idToken = null;
+        state.userId = null;
     },
 
   },
   actions: {
+     signout({commit}){
+          commit('clearAuthData');
+          localStorage.setItem('token', '');
+          localStorage.setItem('userId', '');
+          router.push('/');
+      },
       signup({ commit }, authData){
 
       },
       signin({ commit }, authData){
           axios.post('api/Users/login', authData)
             .then(res => {
-                console.log(res)
+                //console.log(res);
                 commit('authUser', {
                     token: res.data.id,
                     userId: res.data.userId
-                })
+                });
+                localStorage.setItem('token', res.data.id);
+                localStorage.setItem('userId', res.data.userId);
+                //localStorage.setItem('expiresIn', ) fix later for auto signout
                 //redirect logic
-                router.push('/completed');
-
+                router.push('/home');
             })
             .catch(error => console.log(error))
       },
-
+      tryAutoSignin({commit}){
+          const token = localStorage.getItem('token');
+          if(!token){
+             return
+          }
+          const userId = localStorage.getItem('userId');
+          commit('authUser',{
+              token: token,
+              userId: userId
+          });
+          router.push('/home');
+      },
       storeUser({commit, state}, userData){
           if(!state.idToken){
-              return
-          }
 
+          }
       },
       fetchSurveys({commit, state}){
           axios.get('/api/Activities?access_token='+state.idToken)
               .then(res => {
-                  console.log(res)
-                  const data = res.data
-                  const formInfo = []
+                  const data = res.data;
+                  const formInfo = [];
                   for(let key in data){
-                      const info = data[key]
+                      const info = data[key];
                       // info.id = key
                       formInfo.push(info)
                   }
-                  console.log(formInfo)
+                  //console.log(formInfo);
                   commit('setJobs', formInfo)
 
               })
@@ -92,7 +113,7 @@ export const store = new Vuex.Store({
           axios.get('/api/Activities/'+surveyId+'/outsides?access_token='+state.idToken)
               .then(res => {
                   const data = res.data;
-                  console.log(data.bondcx);
+                //  console.log(data.bondcx);
                   const formInfo = [];
                   for(let key in data){
                       const info = data[key];
@@ -102,11 +123,21 @@ export const store = new Vuex.Store({
 
               })
               .catch(error => console.log(error))
+      },
+
+      //******   post section *****
+      newSurveyPost({state}, formData){
+         axios.post('/api/Activities?access_token='+state.idToken, formData)
+             .then(res => {
+               console.log(res)})
+             .catch(error => console.log(error))
       }
 
   },
   getters: {
+    isAuthenticated(state){
+        return state.idToken !== null
+    }
 
-  	
   }
-})
+});

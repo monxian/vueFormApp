@@ -17,11 +17,11 @@
 </template>
 
 <script>
-import Header from './Hearder.vue';
-import Outlet from './newSurvey/Outlets.vue';
-import Outside from './newSurvey/Outside.vue';
-import Problems from './newSurvey/ProblemsList.vue';
-import Equipment from './newSurvey/EquipmentList.vue';
+import Header from '../Hearder.vue';
+import Outlet from './Outlets.vue';
+import Outside from './Outside.vue';
+import Problems from './ProblemsList.vue';
+import Equipment from './EquipmentList.vue';
 
 export default {
   
